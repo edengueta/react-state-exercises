@@ -7,11 +7,29 @@ import React, { Component } from 'react';
  */
 
 class Clock extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			timeToDisplay: 'Loading...'
+		}
+	}
+	startTicking() {
+		setInterval(() => {
+			const date = new Date();
+			const h = date.getHours();
+			const m = date.getMinutes();
+			const s = date.getSeconds();
+			const timeToDisplay = `${h}:${m}:${s}`;
+			this.setState({ timeToDisplay })
+
+		}, 1000);
+	}
 	render() {
+		this.startTicking();
 		return (
 			<div>
 				<h1>Clock</h1>
-				The time is:
+				The time is: {this.state.timeToDisplay}
 			</div>
 		);
 	}
